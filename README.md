@@ -59,5 +59,5 @@ Each feature is implemented in a modular way, making it easy to explore and exte
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/numpy-playground.git
+   git clone https://github.com/mdfaizanashrafi/numpy-playground.git
    cd numpy-playground
