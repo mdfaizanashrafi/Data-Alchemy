@@ -3,6 +3,7 @@
 #Simulations : Functions for simulating coin tosses, dice rolls, random walks, and Monte Carlo experiments.
 #Array Operations : Functions for creating arrays, performing basic operations, and slicing/indexing.
 #Save and Load Data : Functions for saving and loading data to/from files.
+import os.path
 import random
 import matplotlib.pyplot as plt
 import numpy as np
@@ -259,8 +260,26 @@ def visualize_random_walk(positions, title= "Random Walk Simulation"):
 #Scatter Plots: Plot relationships between two variables
 #Bar Charts: Display Categorical Data
 
+def plot_histogram(data,title="Histogram"):
+    plt.hist(data,bins=20,edgecolor='black')
+    plt.title(title)
+    plt.xlabel("Value")
+    plt.ylabel("Frequency")
+    plt.grid(True)
+    plt.show()
 
+#SAVE AND LOAD DATA TO A FILE FOR EASIER ACCESS
 
+def save_data_to_file(data,file_path,format="txt"):
+    #Ensure the directory exists
+    directory = os.path.dirname(file_path)
+    os.makedirs(directory,exist_ok=True)
+    if format == "txt":
+        np.savetxt(file_path,data)
+    elif format=="csv":
+        np.savetxt(file_path,data,delimiter=",")
+    else :
+        raise ValueError("Unsupported format. Use 'txt' or 'csv' format.")
 
 
 

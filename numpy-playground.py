@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from random_utils import simulate_random_walk, estimate_pi, create_zeros_array, create_ones_array, create_random_array, \
     calculate_sum, calculate_mean, find_max, find_min, get_first_element, get_last_element, slice_array, plot_array, \
-    visualize_random_walk
+    visualize_random_walk, plot_histogram, save_data_to_file
 import random_utils
 
 
@@ -185,4 +185,29 @@ visualize_random_walk(position_1d,title="1-D random walk")
 
 position_2d= simulate_random_walk(num_steps=20, dimensions=2)
 visualize_random_walk(position_2d,title="2D Random Walk Simulation")
+
+#create a random array and plot its histogram
+random_array_hist= create_random_array((1000,))
+plot_histogram(random_array_hist,title="Random Data Histogram")
+
+#COMBINED VISUALIZATION
+
+#generate and visualize a random array
+random_arary= create_random_array((10,))
+print(f"Mean of Array: {calculate_mean(random_arary)}")
+plot_array(random_arary,title="Random Array Visualization")
+
+#Simulate and visualize a 2D random walk
+positions_2d= simulate_random_walk(num_steps=50,dimensions=2)
+visualize_random_walk(positions_2d,title="2D Random Walk")
+
+#create a random array and save it to a file
+random_array = create_random_array((5,))
+save_data_to_file(random_array,"data/random_array.txt",format="txt")
+save_data_to_file(random_array, "data/random_array.csv",format="csv")
+print("Data saved to files")
+
+
+
+
 
