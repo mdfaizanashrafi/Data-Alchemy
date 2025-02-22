@@ -1,9 +1,14 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from fontTools.varLib.instancer import axisValuesFromAxisLimits
+
 from random_utils import simulate_random_walk, estimate_pi, create_zeros_array, create_ones_array, create_random_array, \
     calculate_sum, calculate_mean, find_max, find_min, get_first_element, get_last_element, slice_array, plot_array, \
-    visualize_random_walk, plot_histogram, save_data_to_file
-import random_utils
+    visualize_random_walk, plot_histogram, save_data_to_file, reshape_array, concatenate_array, split_array, \
+    transpose_array, apply_trigonometric, apply_exponential, apply_custom_operation, matrix_multiply, \
+    solve_linear_equation, compute_eigen, compute_determinant, compute_inverse, calculate_variance, calculate_median, \
+    compute_correlation, compute_covariance, demonstrate_broadcasting, standardize_array, plot_heatmap, plot_3d
+from random_utils import simulate_coin_toss, simulate_dice_roll
 
 
 
@@ -163,7 +168,43 @@ print(f"Random array:\n {random_array_for_first_and_last_element}")
 print(f"First element:\n {first_element}")
 print(f"Last element:\n {last_element}")
 
+#Create a random 1D array and reshape it into a 2D array:
+random_array_for_reshape = create_random_array((9,))
+print(f"Array to Reshape: {random_array_for_reshape}")
+
+reshaped_array = reshape_array(random_array_for_reshape,(3,3))
+print(f"Reshaped Array: {reshaped_array}")
+
+#Create two random array and concatenate them:
+array1 = create_random_array((3,))
+array2 = create_random_array((3,))
+print(f"Array 1: {array1}")
+print(f"Array 2: {array2}")
+
+#calling the concatenation function from random-utils
+concatenated_array = concatenate_array(array1,array2)
+print(f"Concatenated Array: {concatenated_array}")
+
+#create a random array and split it into 3 parts:
+random_array_split = create_random_array((9,))
+print(f"Original array: {random_array_split}")
+
+splitted_arrays = split_array(random_array_split,num_splits=3)
+print("Split Arrays:")
+for i, part in  enumerate(splitted_arrays):
+    print(f"Part {i+1}: {part}")
+
+#Create a 2D array and transpose it
+random_array_transpose= create_random_array((3,3))
+print(f"Original Array to Transpose: {random_array_transpose}")
+
+transposed_array = transpose_array(random_array_transpose)
+print(f"Transposed Array: {transposed_array}")
+
+#=======================
 #SLICING
+#=======================
+
 #create random array to slice it
 random_array_slice = create_random_array((5,))
 sliced_array= slice_array(random_array_slice,1,3)
@@ -206,6 +247,174 @@ random_array = create_random_array((5,))
 save_data_to_file(random_array,"data/random_array.txt",format="txt")
 save_data_to_file(random_array, "data/random_array.csv",format="csv")
 print("Data saved to files")
+
+#================================
+#TRIGONOMETRIC FUNCTIONS:
+#================================
+#create a random array and apply sine,cose,tan function
+random_trigo_array = create_random_array((5,))
+print(f"Original Trigo Array: {random_trigo_array}")
+
+sin_result = apply_trigonometric(random_trigo_array,func='sin')
+cos_result = apply_trigonometric(random_trigo_array,func='cos')
+tan_result = apply_trigonometric(random_trigo_array,func='tan')
+
+print(f"Sin Result: {sin_result}")
+print(f"Cos Result: {cos_result}")
+print(f"Tan Result: {tan_result}")
+
+#EXPONENTIAL AND LOGARITHMIC FUNCTIONS:
+#create a random array and apply exponential,nat log, log @ base x
+array_for_log = create_random_array((5,))
+print(f"Original Array for Log operation: {array_for_log}")
+
+exponential_result = apply_exponential(array_for_log,operation='exp')
+log_result = apply_exponential(array_for_log,operation='log')
+log10_result = apply_exponential(array_for_log, operation='log10')
+log_base_result = apply_exponential(array_for_log,operation='log_base',base=3)
+
+print(f"Exponential Log: {exponential_result}")
+print(f"Natural Log: {log_result}")
+print(f"Log at Base 10: {log10_result}")
+print(f"Log at Base x: {log_base_result}")
+
+#create a random array and apply a custom operation
+random_array_for_custom_operartion = create_random_array((5,))
+print(f"Original Array for Custom Operation: {random_array_for_custom_operartion}")
+
+squared_result = apply_custom_operation(random_array_for_custom_operartion,operation=lambda x:x**2)
+sqrt_result = apply_custom_operation(random_array_for_custom_operartion, operation=lambda x: np.sqrt(x))
+
+print(f"Squared Operation: {squared_result}")
+print(f"Square Root Operation: {sqrt_result}")
+
+#create two matrix for multiplication
+matrix1 = np.array([[1,2],[3,4]])
+matrix2 = np.array([[3,4],[5,6]])
+
+print(f"Matrix 1: \n {matrix1}")
+print(f"Matrix 2: \n {matrix2}")
+
+multipled_matrix = matrix_multiply(matrix1, matrix2)
+print(f"Matrix Multiplied: \n {multipled_matrix}")
+
+#Define the coefficent matrix and constants vector
+A=np.array([[3,1],[1,2]])
+b=np.array([9,8])
+
+print(f"Coeffiecient Matrix (A): \n {A}")
+print(f"Constant Vector (b):\n {b}")
+
+solution_to_linear_eq= solve_linear_equation(A,b)
+print(f"Solution Vector for LinEq: \n {solution_to_linear_eq}")
+
+#create a square matrix and compute eigenvalues and eigenvectors
+matrix_eigen = np.array([[4,2],[1,3]])
+print(f"Matrix: \n {matrix_eigen}")
+
+eigenvalues, eigenvectors = compute_eigen(matrix_eigen)
+print(f"Eigevalues: {eigenvalues}")
+print(f"Eigenvectors: {eigenvectors}")
+
+#DETERMINANTS AND INVERSE:
+
+#create square matrix
+matrix_dete_inv = np.array([[4,7],[2,6]])
+print(f"Matrix:\n {matrix_dete_inv}")
+
+determinant = compute_determinant(matrix_dete_inv)
+inverse = compute_inverse(matrix_dete_inv)
+
+print(f"Determinant:\n {determinant}")
+print(f"Inverse:\n {inverse}")
+
+#===========================================
+#STATISTICS: 1) Median and Variance
+#            2) Correlation and Covariance
+#============================================
+#Median and Variance
+#create a random array
+median_variance_array = create_random_array((10,))
+print(f"Random Array: {median_variance_array}")
+
+median = calculate_median(median_variance_array)
+variance = calculate_variance(median_variance_array)
+
+print(f"Median: {median}")
+print(f"Variance: {variance}")
+
+#CORRELATION AND COVARIANCE
+
+#create two random arrays:
+corr_cov_array1 = create_random_array((5,))
+corr_cov_array2 = create_random_array((5,))
+
+print(f"Array 1: {corr_cov_array1}")
+print(f"Array 2: {corr_cov_array2}")
+
+correlation = compute_correlation(corr_cov_array1,corr_cov_array2)
+covariance = compute_covariance(corr_cov_array1,corr_cov_array2)
+
+print(f"Correlation Coefficeint: {correlation}")
+print(f"Covariance: {covariance}")
+
+#BROADCASTING:
+
+#broadcast a 1D array across a 2D array
+array_2d = np.array([[1,2,3],[4,5,6]])
+array_1d = np.array([10,20,30])
+
+print(f"2D Array:\n {array_2d}")
+print(f"1D Array: \n {array_1d}")
+
+result = demonstrate_broadcasting(array_2d,array_1d)
+print(f"Result (2D Array + 1D Array):\n {result}")
+
+#================================================
+#CUSTOM UTILITIES:
+#=================================================
+#Normalize:
+#create a random array to normalize it
+normalize_random_array = create_random_array((5,))
+print(f"Original Array to Normalize: {normalize_random_array}")
+
+from random_utils import normalize_array
+normalized_array = normalize_array(normalize_random_array)
+print(f"Array after Normalization: {normalized_array}")
+
+#Scaling:
+#create a random array and standardize it
+scaling_random_array = create_random_array((5,))
+print(f"Original array to scale/standardize: {scaling_random_array}")
+
+standardized_array= standardize_array(scaling_random_array)
+print(f"Standardized Array: {standardized_array}")
+
+#========================================
+#ADVANCED VISUALIZATION:
+#========================================
+#HEATMAP
+# create a random 2D array and plot it as a heatmap
+heatmap_plot = np.random.rand(5,5)
+plot_heatmap(heatmap_plot,title="Random Matrix Heatmap")
+
+# 3D plotting
+#create a 3D surface plot of Z = sin(sqrt(x^2 + y^2))
+
+x= np.linspace(-5,5,100)
+y = np.linspace(-5,5,100)
+X, Y = np.meshgrid(x,y)
+Z = np.sin(np.sqrt(X**2 + Y**2))
+
+plot_3d(X,Y,Z,title="3D Surface Plot")
+
+
+
+
+
+
+
+
 
 
 

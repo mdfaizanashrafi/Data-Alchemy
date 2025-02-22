@@ -8,6 +8,7 @@ import random
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.bezier import inside_circle
+from matplotlib.projections import projection_registry
 
 
 #===========================
@@ -206,6 +207,30 @@ def find_max(array):
 def find_min(array):
     return np.min(array)
 
+#Reshape Array
+def reshape_array(array,new_shape):
+    try:
+        return np.reshape(array,new_shape)
+    except ValueError as e:
+        raise ValueError(f"Cannot reshape array of size {array.size} into {new_shape}.") from e
+
+#Concate Arrays:
+def concatenate_array(array1,array2,axis=0):
+    #concate two arrays along a specifiedd axis
+    return np.concatenate((array1,array2),axis=axis)
+    #np.concatenate((tuples of arrays),axis)
+
+#Split Arrays:
+def split_array(array,num_splits,axis=0):
+    #num_splits = number of splits
+    #returns a list: a list of sub arrays
+    return np.array_split(array,num_splits,axis=axis)
+
+#Transpose Arrays:
+def transpose_array(array):
+    #transpost the array meaning swap rows and columns
+    return np.transpose(array)
+
 #=======================================================
 #SLICE AND INDEX ARRAYS:
 #================================================
@@ -281,6 +306,181 @@ def save_data_to_file(data,file_path,format="txt"):
     else :
         raise ValueError("Unsupported format. Use 'txt' or 'csv' format.")
 
+#==========================================
+#UNIVERSAL FUNCTIONS:
+#=========================================
+#TRIGINOMETRIC FUNCTIONS:
+
+def apply_trigonometric(array,func='sin'):
+    #applies trigonometric fn to each element of an array
+    #func: fn to apply, cos,sin,tan, default is sine
+    if func == 'sin':
+        return np.sin(array)
+    elif func == 'cos':
+        return np.cos(array)
+    elif func == 'tan':
+        return np.tan(array)
+    else:
+        raise ValueError("Unsupported Trigonometric Function. Use Sin, Cos or Tan")
+
+#EXPONENTIAL AND LOGARITHMIC FUNCTIONS:
+#---------------------------------------------
+#operations: exp,log,log10,log@basex
+
+def apply_exponential(array,operation='exp',base=None):
+    if operation == 'exp':
+        return np.exp(array)
+    elif operation == 'log':
+        return np.log(array)
+    elif operation == 'log10':
+        return np.log10(array)
+    elif operation == 'log_base':
+        if base is None:
+            raise ValueError("For 'log_base', you must specify the 'base'.")
+        return np.log(array)/np.log(base)
+    else:
+        raise ValueError("Unsupported Operation, use 'exp','log','log10','log_base'.")
+
+#CUSTOM ELEMENT WISE OPERATION: this function allows useer to apply any custom element-wise
+#transformation to an array using a lambda function or a user defined function
+
+def apply_custom_operation(array, operation= lambda x:x**2):
+    '''Apply a custom element wise operation to an array.
+    Parameter: operation (function,optional): A lambda or custom function
+    to apply, default is sqaring (X^2).
+    '''
+    return np.vectorize(operation)(array)
+
+#===========================================
+#LINEAR ALGERBRA:
+#===========================================
+#Matrix Multiplication: multiplies two matrices
+def matrix_multiply(matrix1,matrix2):
+    try:
+        return np.dot(matrix1, matrix2)
+    except ValueError as e:
+        raise  ValueError("Mattrix dimension are incompatible for multiplication") from e
+
+#Systems of Equations:solves a linear equation
+
+def solve_linear_equation(A,b):
+    '''solve for: A*x = b
+    A(np.ndarray): coefficient matrix must be squared'''
+    try:
+        return np.linalg.solve(A,b)
+        #A: coeffient of x and y in linear equation
+        #b: is the constant on the right side
+    except np.linalg.LinAlgError as e:
+        raise ValueError("Matrix A is singular or not square.") from e
+
+#EIGENVALUES AND EIGENVECTORS:
+#this function computes the eigenvalues and eigenvectors of a square matrix
+
+def compute_eigen(matrix):
+    """Eigenvectors: direction of stretch
+    Eigenvalues: amt of stretch in the specifiedd vectors"""
+    try:
+        return np.linalg.eig(matrix)
+    except np.linalg.LinAlgError as e:
+        raise ValueError("Input matrix must be squared.") from e
+
+#DETERMINANTS AND INVERSE:
+def compute_determinant(matrix):
+    try:
+        return np.linalg.det(matrix)
+    except np.linalg.LinAlgError as e:
+        raise ValueError("Input matrix must be square.") from e
+
+def compute_inverse(matrix):
+    try:
+        return np.linalg.inv(matrix)
+    except np.linalg.LinAlgError as e:
+        raise ValueError("Input matrix is singular or not square") from e
+
+#===========================================
+#STATISTICS: 1) Median and Variance
+#            2) Correlation and Covariance
+#============================================
+def calculate_median(array):
+    return np.median(array)
+
+def calculate_variance(array):
+    return np.var(array)
+
+#COVARIANCE AND CORRELATION
+def compute_correlation(array1, array2):
+    if len(array1) != len(array2):
+        raise ValueError("Both arrays must be of same lenth.")
+    return np.corrcoef(array1,array2)[0,1]
+    #corrcoef used to compute the correlation coefficeint
+
+def compute_covariance(array1,array2):
+    if len(array1) != len(array2):
+        raise ValueError("Both array must ve of the same length.")
+    return np.cov(array1,array2)[0,1]
+
+#BROADCASTING:
+def demonstrate_broadcasting(array1,array2):
+    try:
+        result = array1+array2
+        print(f"Array 1 Shape: {array1.shape}")
+        print(f"Array 2 Shape: {array2.shape}")
+        print(f"Result Shape: {result.shape}")
+        return result
+    except ValueError as e:
+        raise ValueError("Arrays are not broadcast compatile") from e
+
+#===========================================================
+#CUSTOM UTILITIES:
+# 1) Normalization 2) Scaling  3) Advanced Visualization
+#===========================================================
+
+#Normalize Array: It is an array where all values are scaled to [0,1]
+#Logic: normalized = (value-min)/(max-min)
+#handle edge cases where all elements are same, to avoid div by 0
+def normalize_array(array):
+    min_val = np.min(array)
+    max_val = np.max(array)
+    if max_val == min_val:
+        return np.zeros_like(array)
+    return (array - min_val)/(max_val - min_val)
+
+#Scaling: fn standardizes an array to have a mean of 0 and a standard deviation of 1
+#scaling is used in ML pre processing
+# standardized value = (value - mean)/(std_dev)
+
+def standardize_array(array):
+    mean= np.mean(array)
+    std_dev = np.std(array)
+    if std_dev == 0:
+        return np.zeros_like(array) #avoids division by zero
+    return (array - mean)/std_dev
+
+#========================================
+#ADVANCED VISUALIZATION:
+#========================================
+#HEATMAP: visualizes data as color grid, which is useful for matrices or 2D arrays
+
+def plot_heatmap(data,title="Heatmap"):
+    plt.imshow(data,cmap='viridis',aspect='auto')
+    plt.colorbar()
+    plt.title(title)
+    plt.xlabel("Columns")
+    plt.ylabel("Rows")
+    plt.show()
+
+# 3D Plot: visualizes data in three dimension
+
+from mpl_toolkits.mplot3d import Axes3D
+def plot_3d(x,y,z,title='3D Plot'):
+    fig = plt.figure()
+    ax = fig.add_subplot(111,projection='3d')
+    ax.plot_surface(x,y,z,cmap='viridis')
+    ax.set_title(title)
+    ax.set_xlabel("X Axis")
+    ax.set_ylabel("Y Axis")
+    ax.set_zlabel("Z Axis")
+    plt.show()
 
 
 
