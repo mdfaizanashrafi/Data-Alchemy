@@ -1,3 +1,4 @@
+```
 NumPy_Pandas_Playground/
 ├── README.md                  📝 Documentation
 ├── requirements.txt           📋 List of dependencies
@@ -22,3 +23,4 @@ NumPy_Pandas_Playground/
     ├── test_numpy_utils.py    🧮 Tests for NumPy utilities
     ├── test_pandas_utils.py   📊 Tests for Pandas utilities
     └── test_scipy_utils.py    🔬 Tests for SciPy utilities
+```
