@@ -4,7 +4,11 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
+<<<<<<< HEAD
     <orderEntry type="jdk" jdkName="Python 3.12 virtualenv at D:\Python\Data-Alchemy\.venv" jdkType="Python SDK" />
+=======
+    <orderEntry type="jdk" jdkName="Python 3.12 (NumPy-Playground)" jdkType="Python SDK" />
+>>>>>>> 692bdb6426cb3d466c0eeb0cf74917c712b756fb
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

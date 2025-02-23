@@ -3,5 +3,8 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (NumPy-Playground)" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 virtualenv at D:\Python\Data-Alchemy\.venv" project-jdk-type="Python SDK" />
+=======
+>>>>>>> 692bdb6426cb3d466c0eeb0cf74917c712b756fb
 </project>
