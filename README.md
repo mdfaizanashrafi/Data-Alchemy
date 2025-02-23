@@ -2,6 +2,19 @@
 
 _**Built with ❤️ by MD FAIZAN ASHRAFI**_
 
+
+
+<div style="display: flex; gap: 300px; align-items: center;justify-content: center;flex-wrap: wrap;">
+    <img src="https://numpy.org/images/logo.svg" alt="NumPy Logo" style="width: 90px; height: auto;" title="NumPy">
+    <img src="https://scipy.org/images/logo.svg" alt="SciPy Logo" style="width: 90px; height: auto;" title="Pandas">
+    <img src="https://matplotlib.org/stable/_static/logo2.svg" alt="Matplotlib Logo" width="150">
+    <img src="https://webimages.mongodb.com/_com_assets/cms/kuyjf3vea2hg34taa-horizontal_default_slate_blue.svg?auto=format%252Ccompress" alt="MongoDB Logo" width="150">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/dd/MySQL_logo.svg/150px-MySQL_logo.svg.png" alt="MySQL Logo" width="150">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/TensorFlow_logo.svg/330px-TensorFlow_logo.svg.png" alt="ML Logo" width="150">
+</div>
+
+
+
 _Welcome to the **NumPy_Pandas_Playground**! 🎉 This project is your one-stop shop for experimenting with **numerical computations**, **data manipulation**, **scientific computing**, **visualizations**, and **database integrations**. Whether you're a beginner or an experienced data scientist, this modular playground has everything you need to explore and learn._
 
 _**🌟 Features**_
