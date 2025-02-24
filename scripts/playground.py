@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from fontTools.varLib.instancer import axisValuesFromAxisLimits
-<<<<<<< HEAD
+
 # scripts/playground.py
 
 from utils.numpy_utils import(generate_random_choices,
@@ -36,7 +36,7 @@ from random_utils import simulate_coin_toss, simulate_dice_roll
 
 from random_utils import (
     generate_random_choices,
->>>>>>> 692bdb6426cb3d466c0eeb0cf74917c712b756fb
+
     generate_random_booleans,
     generate_random_permutations,
     generate_random_integers,
@@ -46,10 +46,7 @@ from random_utils import (
     generate_binomial_distribution,
     generate_poisson_distribution,
     generate_exponential_distribution
-<<<<<<< HEAD
-=======
 
->>>>>>> 692bdb6426cb3d466c0eeb0cf74917c712b756fb
 )
 
 
@@ -404,11 +401,11 @@ print(f"Result (2D Array + 1D Array):\n {result}")
 normalize_random_array = create_random_array((5,))
 print(f"Original Array to Normalize: {normalize_random_array}")
 
-<<<<<<< HEAD
+
 from utils.numpy_utils import normalize_array
 =======
 from random_utils import normalize_array
->>>>>>> 692bdb6426cb3d466c0eeb0cf74917c712b756fb
+
 normalized_array = normalize_array(normalize_random_array)
 print(f"Array after Normalization: {normalized_array}")
 
