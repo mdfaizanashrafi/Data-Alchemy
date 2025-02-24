@@ -34,7 +34,7 @@ _**Future Expansions**🚀:_
 **📂 Project Structure**
 The project is organized into the following folders and files:
 ```
-NumPy_Pandas_Playground/
+Data-Alchemy/
 ├── README.md                  📝 Documentation
 ├── requirements.txt           📋 List of dependencies
 ├── data/                      📁 Folder for saved data
