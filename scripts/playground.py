@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from fontTools.varLib.instancer import axisValuesFromAxisLimits
 
 # scripts/playground.py
-
+'''
 from utils.numpyUtils import(generate_random_choices,
                               generate_random_booleans,
                               generate_random_permutations,
@@ -437,9 +437,18 @@ X, Y = np.meshgrid(x,y)
 Z = np.sin(np.sqrt(X**2 + Y**2))
 
 plot_3d(X,Y,Z,title="3D Surface Plot")
+'''
+#============================================================================================================
+#PANDAS UTILITIES:
+#============================================================================================================
+import pandas as pd
+from utils.pandasUtils import(
+    load_data,
+)
 
-
-
+#Load Data:
+df= load_data("random_data.csv")
+print(df.head())
 
 
 
