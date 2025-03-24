@@ -1,5 +1,4 @@
 import pandas as pd
-import sklearn as sk
 
 #Load csv file into a dataframe with error handleing
 def load_data(file_path,**kwargs)->pd.DataFrame:
@@ -44,7 +43,7 @@ def group_and_aggregate(
 def split_train_data(df: pd.DataFrame,
                      test_size: float=0.2,
                      random_state: int=42)-> tuple:
-    from sk.model_selection import train_test_split # type: ignore
+    from sklearn.model_selection import train_test_split # type: ignore
     return train_test_split(
         df, test_size=test_size,random_state=random_state)
     

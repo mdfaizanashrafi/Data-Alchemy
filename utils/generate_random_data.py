@@ -43,5 +43,7 @@ df.to_json(directory,orient="records")
 
 print(f"Random Data Generated and saved to {directory}")
 
-
+# Print the paths of the saved files
+print(f"Random Data Generated and saved to CSV file: {file_path}")
+print(f"Random Data Generated and saved to JSON file: {directory}")
 

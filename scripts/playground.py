@@ -1,8 +1,10 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-
+project_root= os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(project_root)
+#cd sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import utils.numpyUtils
+import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from fontTools.varLib.instancer import axisValuesFromAxisLimits
@@ -437,19 +439,22 @@ X, Y = np.meshgrid(x,y)
 Z = np.sin(np.sqrt(X**2 + Y**2))
 
 plot_3d(X,Y,Z,title="3D Surface Plot")
-'''
+
 #============================================================================================================
 #PANDAS UTILITIES:
 #============================================================================================================
-import pandas as pd
-from utils.pandasUtils import(
-    load_data,
-)
+'''
+from utils.pandasUtils import load_data, clean_missing_values
+file_path = "d:/Python/Data-Alchemy/data/random_data_for_test.csv"
+df = load_data(file_path=file_path)
 
-#Load Data:
-df= load_data("random_data.csv")
-print(df.head())
+#Cleaning missing values:
 
+cleaned_df= clean_missing_values(df,
+                                 strategy="fill",
+                                 fill_value=0.0,
+                                 columns=["Column1","Column2"])
+print("\n Cleaned DataFrame(filled NaNs): \n",cleaned_df.head())
 
 
 
