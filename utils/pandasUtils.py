@@ -10,7 +10,7 @@ def load_data(file_path,**kwargs)->pd.DataFrame:
 #function to clean missing values   
 def clean_missing_values(
         df: pd.DataFrame,
-        strategy: str='drop',
+        strategy: str,
         fill_value:float=0.0,
         columns: list=None)->pd.DataFrame:
     if strategy == 'drop':

@@ -444,17 +444,38 @@ plot_3d(X,Y,Z,title="3D Surface Plot")
 #PANDAS UTILITIES:
 #============================================================================================================
 '''
-from utils.pandasUtils import load_data, clean_missing_values
+from utils.pandasUtils import load_data, clean_missing_values,filter_rows, rename_columns, get_summary_stats
+from utils.pandasUtils import group_and_aggregate
 file_path = "d:/Python/Data-Alchemy/data/random_data_for_test.csv"
 df = load_data(file_path=file_path)
 
 #Cleaning missing values:
 
 cleaned_df= clean_missing_values(df,
-                                 strategy="fill",
+                                 strategy='drop',
                                  fill_value=0.0,
-                                 columns=["Column1","Column2"])
+                                 columns=["Address","Email"])
+
 print("\n Cleaned DataFrame(filled NaNs): \n",cleaned_df.head())
+
+#Filter rows:
+filtered_df = filter_rows(cleaned_df,condition="Country=='Brazil'")
+print(f"Filtered Dataframe (United States): \n {filtered_df.head()}")
+
+renamed_df = rename_columns(cleaned_df,
+                            {"Name":"Full Name",
+                             "Phone Number":"Number",})
+print(renamed_df.head())
+
+summary = get_summary_stats(renamed_df)
+print(summary)
+
+agg_df = group_and_aggregate(renamed_df,
+                             agg_dict={"Phone Number":"mean"}
+                             )
+
+print(agg_df)
+
 
 
 
