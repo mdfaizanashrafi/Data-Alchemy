@@ -47,6 +47,20 @@ def split_train_data(df: pd.DataFrame,
     return train_test_split(
         df, test_size=test_size,random_state=random_state)
     
+#data cleaning & preprocessing
+def handle_duplicates(df: pd.DataFrame,
+                      subset: list=None,
+                      keep: str="first",
+                      mark_duplicates: bool=False) -> pd.DataFrame:
+    if mark_duplicates:
+        df['is_duplicate']=df.duplicated(subset=subset,keep=keep)
+        return df
+    else:
+        return df.drop_duplicates(subset=subset,keep=keep)
+    
+#Impute missing values using mean/meduam/mode
+
+    
 
 
 
