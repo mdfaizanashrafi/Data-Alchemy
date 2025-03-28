@@ -59,7 +59,20 @@ def handle_duplicates(df: pd.DataFrame,
         return df.drop_duplicates(subset=subset,keep=keep)
     
 #Impute missing values using mean/meduam/mode
+def impute_missing_values(df: pd.DataFrame,
+                          strategy: str='mean',
+                          columns: list=None)-> pd.DataFrame:
+    if columns is None:
+        columns = df.select_dtypes(include=['number']).columns
 
+    if strategy in ["mean","median"]:
+        impute_val= df[columns].agg(strategy).to_dict()
+    elif strategy == "mode":
+        impute_val= df[columns].agg(lambda x:x.mode()[0]).to_dict()
+    else:
+        impute_val = {col:strategy for col in columns}
+
+    return df.fillna(impute_val)
     
 
 
